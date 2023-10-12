@@ -4,6 +4,6 @@ namespace chatbot_backend.Core.Integrations.Interfaces
 {
     public interface IOpenAIIntegration
     {
-        Task<string> GenerarRespuesta(MensajesDTO mensajes);
+        Task<string> GenerarRespuesta(List<InputOutputDTO> mensajes);
     }
 }

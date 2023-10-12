@@ -15,7 +15,7 @@ namespace chatbot_backend.Core.Integrations
         {
             _openAIConfiguration = optionsMonitor.CurrentValue;
         }
-        public async Task<string> GenerarRespuesta(MensajesDTO mensajes)
+        public async Task<string> GenerarRespuesta(List<InputOutputDTO> mensajes)
         {
             // api instance
             var api = new OpenAI_API.OpenAIAPI(_openAIConfiguration.Key);
@@ -23,14 +23,14 @@ namespace chatbot_backend.Core.Integrations
 
             chat.Model = Model.ChatGPTTurbo;
             /// give instruction as System
-            var system = "Sos un chatbot especializado en turismo y gastronomia de la Ciudad de Buenos Aires";
+            var system = "Sos un chatbot especializado en turismo y gastronomia de la Ciudad de Buenos Aires. Solo podes responder preguntas relacionadas con esa Ciudad. Cualquier otra ubicacion tenes que responder que no sabes la respuesta.";
             chat.AppendSystemMessage(system);
 
-            var pregunta = mensajes.Mensajes.Last();
-            mensajes.Mensajes.Remove(pregunta);
+            var pregunta = mensajes.Last();
+            mensajes.Remove(pregunta);
 
             // give a few examples as user and assistant
-            foreach (var mensaje in mensajes.Mensajes) {
+            foreach (var mensaje in mensajes) {
                 chat.AppendUserInput(mensaje.Input);
                 chat.AppendExampleChatbotOutput(mensaje.Output);
             }

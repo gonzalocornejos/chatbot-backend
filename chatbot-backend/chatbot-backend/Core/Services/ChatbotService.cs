@@ -12,15 +12,15 @@ namespace chatbot_backend.Core.Services
         {
             _openAIIntegration = openAIIntegration;
         }
-        public async Task<MensajesDTO> GenerarRespuesta(MensajesDTO mensajes)
+        public async Task<List<InputOutputDTO>> GenerarRespuesta(List<InputOutputDTO> mensajes)
         {
-            var mensaje = mensajes.Mensajes.Last();
+            var mensaje = mensajes.Last();
 
             var respuesta = await _openAIIntegration.GenerarRespuesta(mensajes);
-            mensajes.Mensajes.Remove(mensaje);
+            mensajes.Remove(mensaje);
 
             mensaje.Output = respuesta;
-            mensajes.Mensajes.Add(mensaje);
+            mensajes.Add(mensaje);
 
             return mensajes;
         }

@@ -30,7 +30,7 @@ namespace chatbot_backend.Core.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GenerarTextoYAudio([FromBody] MensajesDTO mensajes)
+        public async Task<IActionResult> GenerarTextoYAudio([FromBody] List<InputOutputDTO> mensajes)
         {
             if (!ModelState.IsValid)
             {

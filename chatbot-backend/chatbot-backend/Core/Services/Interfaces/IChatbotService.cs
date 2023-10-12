@@ -4,6 +4,6 @@ namespace chatbot_backend.Core.Services.Interfaces
 {
     public interface IChatbotService
     {
-        Task<MensajesDTO> GenerarRespuesta(MensajesDTO mensajes);
+        Task<List<InputOutputDTO>> GenerarRespuesta(List<InputOutputDTO> mensajes);
     }
 }
